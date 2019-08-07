@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">이미지</th>
+            <th scope="col">코드</th>
+            <th scope="col">제목</th>
+            <th scope="col">내용</th>
+            <th scope="col">과목</th>
+            <th scope="col">작성날짜</th>
+            <th scope="col">작성자</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in sharecodes %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{% if s.image %}<img width=10 height=10 src={{s.image.url}}>{% endif %}</td>
+            <td>{{s.codesum}}...</td>
+            <td>{{s.title}}</td>
+            <td><a href="{% url 'sharedetail' s.id %}">{{s.sum}}...</a></td>
+            <td>{{s.subject}}</td>
+            <td>{{s.pub_date}}</td>
+            <td>{{s.writer}}</td>
+        </tr>
+        {% endfor %}     
+    </tbody>
+</table>
+<a href="{% url 'sharenew' %}">내 코드 공유하기</a><br>
+<a href="{% url 'index' %}">뒤로</a>
+
+{% endblock %}

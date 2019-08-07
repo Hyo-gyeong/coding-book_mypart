@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+{% if askdetail.image %}<img src="{{askdetail.image.url}}" width=600 height=400>{% endif %}<br>
+제목 : {{askdetail.title}}<br>
+내용 : {{askdetail.body|linebreaksbr}}<br>
+<div class="codes"> 코드 : {{askdetail.codes|linebreaksbr}}<br></div>
+{{askdetail.pub_date}}<br>
+과목명 : {{askdetail.subject}}<br>
+작성자 : {{askdetail.writer}}<br>
+<a href="{% url 'ask'%}">뒤로가기</a>
+<a href="{% url 'askdelete' askdetail.id %}">삭제</a>
+<a href="{% url 'askedit' askdetail.id %}">수정</a>
+
+{% endblock %}

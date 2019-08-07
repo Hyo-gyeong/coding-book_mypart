@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+{% if sharedetail.image %}<img src="{{sharedetail.image.url}}" width=600 height=400>{% endif %}<br>
+제목 : {{sharedetail.title}}<br>
+내용 : {{sharedetail.body|linebreaksbr}}<br>
+<div class="codes"> 코드 : {{sharedetail.codes|linebreaksbr}}<br></div>
+{{sharedetail.pub_date}}<br>
+과목명 : {{sharedetail.subject}}<br>
+대학교 : {{sharedetail.university}}<br>
+점수 : {{sharedetail.score}}<br>
+작성자 : {{sharedetail.writer}}<br>
+
+<hr>
+<form method="POST" action="{% url 'sharecomment_create' sharedetail.id %}">
+    {% csrf_token %}
+    <textarea name = "contents" cols="90" rows="4" placeholder=" 댓글을 작성하세요."></textarea>
+    <button type="submit" calss="btn">댓글 작성</button>
+</form>
+    {% for comment in post.sharecomments.all %}
+    <ul style="list-style-type:none;">
+        <li>↳{{comment.sharecontents}} <small><a style="float:right;" href="{% url 'sharecomment_delete' codeshare.id sharecomment.id %}" class="delete">✖️</a></small></li>
+    </ul>
+    {% endfor %} 
+
+<hr>
+<a href="{% url 'share'%}">뒤로가기</a>
+<a href="{% url 'sharedelete' sharedetail.id %}">삭제</a>
+<a href="{% url 'shareedit' sharedetail.id %}">수정</a>
+
+{% endblock %}
